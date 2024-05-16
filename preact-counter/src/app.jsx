@@ -6,6 +6,14 @@ import './app.css'
 export function App() {
   const [count, setCount] = useState(0)
 
+  const handleInput = (event) => {
+    setCount(Number(event.target.value) || 0);
+  };
+
+  const handleDblClick = () => {
+    setCount(0);
+  };
+
   return (
     <>
       <div>
@@ -18,8 +26,11 @@ export function App() {
       </div>
       <h1>Vite + Preact</h1>
       <div class="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+      <button onClick={() => setCount(count - 1)}>-</button>
+        <input type="number" value={count} onInput={handleInput} />
+        <button onClick={() => setCount(count + 1)}>+</button>
+        <button onDblClick={handleDblClick} title="Double click">
+          Reset (double click)
         </button>
         <p>
           Edit <code>src/app.jsx</code> and save to test HMR
